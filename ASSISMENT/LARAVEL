@@ -1,0 +1,107 @@
+1. Program to Demonstrate Healthify Application Using Laravel
+
+    Install Laravel:
+
+composer create-project --prefer-dist laravel/laravel HealthifyApp
+
+Set up environment variables in .env file:
+
+DB_DATABASE=healthify
+DB_USERNAME=root
+DB_PASSWORD=
+
+Run migrations:
+
+    php artisan migrate
+
+    Create models, controllers, and views using MVC principles.
+
+2. Features of the Healthify Application
+
+    Doctor Module
+        Register/Login
+        View other doctors
+        Manage (update/delete) patient appointments
+
+    Patient Module
+        Register/Login
+        View all doctors
+        Book appointments with doctors
+
+3. Use of ORM (Eloquent) for Database Operations
+
+    Creating a Model for Doctors
+
+php artisan make:model Doctor -m
+
+Sample Eloquent Query
+
+    $doctors = Doctor::all();
+    return view('doctors.index', compact('doctors'));
+
+4. Super Admin Panel
+
+    Create Admin User using Laravel traditional authentication
+
+    php artisan make:middleware AdminMiddleware
+
+    Add role-based authentication to restrict access.
+
+5. Blade Template for UI
+
+    Create base.blade.php for header and sidebar
+
+    @include('layouts.header')
+    @yield('content')
+    @include('layouts.footer')
+
+    Use @foreach loop in Blade to display doctor/patient lists.
+
+6. JavaScript Validations
+
+    Validate registration form using JavaScript/Ajax
+
+    $("#registerForm").submit(function(e){
+        e.preventDefault();
+        let name = $("#name").val();
+        if(name == ""){
+            alert("Name is required");
+        }
+    });
+
+7. Forgot Password Feature
+
+    Laravel built-in feature
+
+php artisan make:auth
+php artisan migrate
+
+Configure email settings in .env
+
+    MAIL_MAILER=smtp
+    MAIL_HOST=smtp.mailtrap.io
+
+8. Database Normalization
+
+    Create separate tables for users, doctors, patients, appointments
+    Use foreign keys to maintain relationships.
+
+9. Confirmation Messages
+
+    Display success/error messages using session flash messages
+
+    return redirect()->back()->with('success', 'Appointment booked successfully');
+
+10. Delete Confirmation
+
+    Before deleting, ask for confirmation using JavaScript
+
+    function confirmDelete() {
+        return confirm("Are you sure you want to delete?");
+    }
+
+11. Session Management
+
+    Use Laravel auth for login/logout
+
+Auth::logout();
