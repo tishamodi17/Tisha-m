@@ -1,0 +1,21 @@
+Q2->How to pass Multiple Variable in route?
+
+//Inside the route web folder 
+Route::get('/example/{var1}/{var2}', function ($var1, $var2) {
+    return view('example', ['var1' => $var1, 'var2' => $var2]);
+});
+
+
+//Example Blade File (example.blade.php)
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Example</title>
+</head>
+<body>
+    <p>Variable 1: {{ $var1 }}</p>
+    <p>Variable 2: {{ $var2 }}</p>
+</body>
+</html>
+
+

@@ -1,0 +1,9 @@
+6. Pagination in Employee Management
+Add Pagination in Controller
+
+$employees = Employee::paginate(10); // 10 records per page
+return view('employees.index', compact('employees'));
+
+Display Pagination in Blade Template
+
+{{ $employees->links() }}

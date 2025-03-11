@@ -1,0 +1,13 @@
+Q3->How to pass variable which can be null in Route?
+
+To pass a variable that can be null in a Laravel route, make the variable optional by adding ? after the variable name and set a default value of null in the callback or controller.
+Example
+
+Route::get('/example/{var?}', function ($var = null) {
+    return $var ? "Value: $var" : "No value provided.";
+});
+
+Result
+
+    Access /example/value: Outputs Value: value
+    Access /example: Outputs No value provided

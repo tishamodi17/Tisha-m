@@ -1,0 +1,25 @@
+3. Apply CRUD Operations using Query Builder for Employee Management
+
+Using Laravel's Query Builder, you can perform CRUD operations:
+Create (Insert) Employee
+
+DB::table('employees')->insert([
+    'name' => 'John Doe',
+    'email' => 'johndoe@example.com',
+    'position' => 'Developer',
+    'salary' => 50000,
+]);
+
+Read (Get) Employees
+
+$employees = DB::table('employees')->get();
+
+Update Employee
+
+DB::table('employees')
+    ->where('id', 1)
+    ->update(['salary' => 60000]);
+
+Delete Employee
+
+DB::table('employees')->where('id', 1)->delete();

@@ -1,0 +1,57 @@
+9. Blog Application
+Create Post Model & Migration
+
+php artisan make:model Post -m
+
+Modify create_posts_table.php:
+
+Schema::create('posts', function (Blueprint $table) {
+    $table->id();
+    $table->string('title');
+    $table->text('content');
+    $table->timestamps();
+});
+
+Run migration:
+
+php artisan migrate
+
+PostController CRUD
+
+php artisan make:controller PostController --resource
+
+Modify PostController.php:
+
+public function store(Request $request)
+{
+    Post::create($request->all());
+    return redirect()->route('posts.index');
+}
+
+public function update(Request $request, Post $post)
+{
+    $post->update($request->all());
+    return redirect()->route('posts.index');
+}
+
+public function destroy(Post $post)
+{
+    $post->delete();
+    return redirect()->route('posts.index');
+}
+
+Routes in web.php
+
+use App\Http\Controllers\PostController;
+
+Route::resource('posts', PostController::class);
+
+Create Post Form (Blade)
+
+<form action="{{ route('posts.store') }}" method="POST">
+    @csrf
+    <input type="text" name="title" placeholder="Title">
+    <textarea name="content" placeholder="Content"></textarea>
+    <button type="submit">Submit</button>
+</form>
+

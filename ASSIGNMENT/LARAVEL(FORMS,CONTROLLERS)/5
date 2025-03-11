@@ -1,0 +1,14 @@
+5. Implementing Session for Employee Management System
+
+Sessions store temporary data like authentication or user preferences.
+Store Session
+
+session(['employee_id' => 1]);
+
+Retrieve Session Data
+
+$id = session('employee_id');
+
+Delete Session Data
+
+session()->forget('employee_id');

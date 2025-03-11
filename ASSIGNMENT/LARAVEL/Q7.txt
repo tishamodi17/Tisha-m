@@ -1,0 +1,5 @@
+Q7->How to remove route caching?
+
+To remove or clear route caching in Laravel, you can use the following Artisan command:
+
+php artisan route:clear

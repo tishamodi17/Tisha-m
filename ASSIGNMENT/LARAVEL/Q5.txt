@@ -1,0 +1,16 @@
+Generate Resource Controller for employee.
+
+//To generate a resource controller for Employee in Laravel, use the following Artisan command:
+
+php artisan make:controller EmployeeController --resource
+
+What This Does
+
+    Creates a file EmployeeController.php in the app/Http/Controllers directory.
+    Includes predefined methods for common actions: index, create, store, show, edit, update, and destroy.
+
+Using the Resource Controller
+
+Define a resource route in routes/web.php:
+
+Route::resource('employees', EmployeeController::class);

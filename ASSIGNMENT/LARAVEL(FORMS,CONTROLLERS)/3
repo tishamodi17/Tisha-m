@@ -1,0 +1,31 @@
+3. Eloquent Relationships
+One-to-One Relationship (Employee & Profile)
+
+class Employee extends Model
+{
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+}
+
+One-to-Many Relationship (Employee & Projects)
+
+class Employee extends Model
+{
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
+}
+
+Many-to-Many Relationship (Employee & Skills)
+
+class Employee extends Model
+{
+    public function skills()
+    {
+        return $this->belongsToMany(Skill::class);
+    }
+}
+

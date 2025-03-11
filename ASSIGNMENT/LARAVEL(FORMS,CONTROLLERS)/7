@@ -1,0 +1,42 @@
+7. Notifications for New User Registration
+Generate Notification
+
+php artisan make:notification NewUserNotification
+
+Modify NewUserNotification.php
+
+use Illuminate\Notifications\Notification;
+use Illuminate\Notifications\Messages\MailMessage;
+
+class NewUserNotification extends Notification
+{
+    public function via($notifiable)
+    {
+        return ['database']; // Stores in DB
+    }
+
+    public function toArray($notifiable)
+    {
+        return [
+            'message' => 'A new user has registered!',
+            'user' => auth()->user()->name,
+        ];
+    }
+}
+
+Send Notification When User Registers
+
+Modify User.php model:
+
+use Illuminate\Notifications\Notifiable;
+
+class User extends Authenticatable
+{
+    use Notifiable;
+}
+
+Trigger Notification in RegisterController
+
+use App\Notifications\NewUserNotification;
+
+$user->notify(new NewUserNotification());

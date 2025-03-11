@@ -1,0 +1,33 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+// Route for Home Page
+Route::get('/', function () {
+    return view('home'); // Ensure a home.blade.php exists in resources/views
+})->name('home');
+
+// Route for About Us Page
+Route::get('/about-us', function () {
+    return view('about'); // Ensure an about.blade.php exists in resources/views
+})->name('about');
+
+// Route for Contact Us Page
+Route::get('/contact-us', function () {
+    return view('contact'); // Ensure a contact.blade.php exists in resources/views
+})->name('contact');
+
+// Route for Gallery Page
+Route::get('/gallery', function () {
+    return view('gallery'); // Ensure a gallery.blade.php exists in resources/views
+})->name('gallery');
+
+// Route for Registration Page
+Route::get('/register', function () {
+    return view('register'); // Ensure a register.blade.php exists in resources/views
+})->name('register');
+
+// Route for Login Page
+Route::get('/login', function () {
+    return view('login'); // Ensure a login.blade.php exists in resources/views
+})->name('login');

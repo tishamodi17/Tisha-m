@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            justify-content: center;
+            align-items: center;
+            height: 150vh;
+            margin: 80;
+        }
+        .form-container {
+            background-color: #b3d892;
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 700px;
+        }
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-container label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        .form-container input[type="text"],
+        .form-container input[type="email"],
+        .form-container input[type="tel"],
+        .form-container input[type="number"],
+        .form-container textarea,
+        .form-container select {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-container input[type="radio"] {
+            margin-right: 10px;
+        }
+        .form-container .card-type label {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>PHP Assignment</h2>
+        <form action="#" method="post" enctype="multiple/form-data">
+            <div>
+                <form id=payment>
+    <fieldset>
+        <legend>Your details</legend>
+        <ol>
+            <li>
+                <label for=name>Name</label>
+                <input id=name name=name type=text placeholder="First and last name" required autofocus>
+            </li>
+            <li>
+                <label for=email>Email</label>
+                <input id=email name=email type=email placeholder="example@domain.com" required>
+            </li>
+            <li>
+                <label for=phone>Phone</label>
+                <input id=phone name=phone type=tel placeholder="Eg. +447500000000" required>
+            </li>
+        </ol>
+    </fieldset>
+    <fieldset>
+        <legend>Delivery address</legend>
+        <ol>
+            <li>
+                <label for=address>Address</label>
+                <textarea id=address name=address rows=5 required></textarea>
+            </li>
+            <li>
+                <label for=postcode>Post code</label>
+                <input id=postcode name=postcode type=text required>
+            </li>
+            <li>
+                <label for=country>Country</label>
+                <input id=country name=country type=text required>
+            </li>
+        </ol>
+    </fieldset>
+    <fieldset>
+        <legend>Card details</legend>
+        <ol>        
+            <li>
+                <fieldset>
+                    <legend>Card type</legend>
+                    <ol>
+                        <li>
+                            <input id=visa name=cardtype type=radio>
+                            <label for=visa>VISA</label>
+                        </li>
+                        <li>
+                            <input id=amex name=cardtype type=radio>
+                            <label for=amex>AmEx</label>
+                        </li>
+                        <li>
+                            <input id=mastercard name=cardtype type=radio>
+                            <label for=mastercard>Mastercard</label>
+                        </li>
+                    </ol>
+                </fieldset>
+            </li>
+            <li>
+                <label for=cardnumber>Card number</label>
+                <input id=cardnumber name=cardnumber type=number required>
+            </li>
+            <li>
+                <label for=secure>Security code</label>
+                <input id=secure name=secure type=number required>
+            </li>
+            <li>
+                <label for=namecard>Name on card</label>
+                <input id=namecard name=namecard type=text placeholder="Exact name as on the card" required>
+            </li>
+        </ol>
+    </fieldset>
+    <fieldset>
+        <button type=submit>Buy it!</button>
+    </fieldset>
+</form>

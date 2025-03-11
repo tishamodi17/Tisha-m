@@ -1,0 +1,35 @@
+Q4->Create custom auto using middleware.
+
+1. Create the Middleware
+
+Run the Artisan command:
+
+php artisan make:middleware CustomAuth
+
+2. Add Logic to the Middleware
+
+Edit the generated file app/Http/Middleware/CustomAuth.php:
+
+public function handle($request, Closure $next)
+{
+    if (!$request->header('X-Auth-Token')) {
+        return response('Unauthorized', 401);
+    }
+    return $next($request);
+}
+
+3. Register the Middleware
+
+Add it to app/Http/Kernel.php under $routeMiddleware:
+
+protected $routeMiddleware = [
+    'custom.auth' => \App\Http\Middleware\CustomAuth::class,
+];
+
+4. Use the Middleware
+
+Apply it to a route:
+
+Route::get('/dashboard', function () {
+    return 'Welcome!';
+})->middleware('custom.auth');

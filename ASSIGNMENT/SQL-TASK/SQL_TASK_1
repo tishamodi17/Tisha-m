@@ -1,0 +1,54 @@
+ A) SELECT First_Name AS "Employee Name" FROM employee;
+
+ B) SELECT 
+    FIRST_NAME,
+    EXTRACT(YEAR FROM JOINING_DATE) AS Joining_Year,
+    EXTRACT(MONTH FROM JOINING_DATE) AS Joining_Month,
+    EXTRACT(DAY FROM JOINING_DATE) AS Joining_Date FROM employee;
+
+C) SELECT * FROM employee ORDER BY FIRST_NAME ASC, SALARY DESC;
+
+D)SELECT * FROM employee WHERE FIRST_NAME LIKE '%o%';
+
+E) SELECT *FROM employee WHERE EXTRACT(MONTH FROM JOINING_DATE) = 1;
+
+F) SELECT  DEPARTMENT,SUM(SALARY) AS Total_Salary FROM employee GROUP BY DEPARTMENT ORDER BY Total_Salary DESC;
+
+G) SELECT DEPARTMENT,MAX(SALARY) AS Max_Salary FROM employee GROUP BY DEPARTMENT ORDER BY Max_Salary ASC;
+
+H) SELECT e.first_name, i.incentive_amount FROM employee e JOIN incentives i ON e.employee_id = i.employee_id
+WHERE i.incentive_amount > 3000;
+ 
+ I) SELECT MAX(salary) AS Second_Highest_Salary
+FROM employee
+WHERE salary < (SELECT MAX(salary) FROM employee);
+
+I) SELECT salary
+FROM employee
+ORDER BY salary DESC
+LIMIT 1 OFFSET 1;
+
+J) SELECT e.first_name, COALESCE(i.incentive_amount, 0) AS incentive_amount
+FROM employee e
+LEFT JOIN incentives i ON e.employee_id = i.employee_id;
+
+K) CREATE VIEW employee_view AS
+SELECT first_name, last_name, salary
+FROM employee;
+
+
+L) CREATE PROCEDURE DepartmentWiseHighestSalary()
+BEGIN
+    SELECT department_id, MAX(salary) AS highest_salary
+    FROM employee
+    GROUP BY department_id;
+END;
+
+M) CREATE TRIGGER after_employee_insert
+AFTER INSERT ON employee
+FOR EACH ROW
+BEGIN
+    INSERT INTO employee_view (first_name, last_name, salary)
+    VALUES (NEW.first_name, NEW.last_name, NEW.salary);
+END;
+

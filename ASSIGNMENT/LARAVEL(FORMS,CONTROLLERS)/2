@@ -1,0 +1,26 @@
+ 2. CRUD Operations Using Eloquent
+
+Eloquent simplifies CRUD operations:
+Create (Insert Record)
+
+Employee::create([
+    'name' => 'John Doe',
+    'email' => 'john@example.com',
+    'position' => 'Developer',
+    'salary' => 60000,
+]);
+
+Read (Retrieve Records)
+
+$employees = Employee::all(); // Get all employees
+$employee = Employee::find(1); // Find by ID
+
+Update (Modify Record)
+
+$employee = Employee::find(1);
+$employee->salary = 70000;
+$employee->save();
+
+Delete (Remove Record)
+
+Employee::destroy(1);

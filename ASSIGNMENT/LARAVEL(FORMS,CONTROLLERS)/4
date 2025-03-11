@@ -1,0 +1,16 @@
+4. Eager Loading vs. Lazy Loading
+Lazy Loading (Default)
+
+    Loads relationships only when accessed.
+
+$employees = Employee::all(); // Employees fetched
+foreach ($employees as $employee) {
+    echo $employee->projects; // Loads projects individually (N+1 issue)
+}
+
+Eager Loading (Recommended)
+
+    Loads relationships in one query to avoid N+1 problem.
+
+$employees = Employee::with('projects')->get();
+

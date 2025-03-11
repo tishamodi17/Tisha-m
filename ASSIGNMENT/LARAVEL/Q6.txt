@@ -1,0 +1,48 @@
+Q6->In Employee Controller‟s action Call Middleware.
+
+Steps to Apply Middleware in EmployeeController
+1. Define the Middleware in Kernel.php
+
+Ensure your middleware is registered in app/Http/Kernel.php under $routeMiddleware:
+
+protected $routeMiddleware = [
+    // Other middleware
+    'custom.auth' => \App\Http\Middleware\CustomAuth::class,
+];
+
+2. Use Middleware in the Controller
+
+Open the EmployeeController file and use the middleware method inside the constructor to apply it to specific actions:
+
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class EmployeeController extends Controller
+{
+    public function __construct()
+    {
+        // Apply middleware to specific actions
+        $this->middleware('custom.auth')->only(['create', 'store']);
+        
+        // Or exclude it from specific actions
+        // $this->middleware('custom.auth')->except(['index', 'show']);
+    }
+
+    public function index()
+    {
+        return "List of employees";
+    }
+
+    public function create()
+    {
+        return "Create employee form";
+    }
+
+    public function store(Request $request)
+    {
+        return "Store employee details";
+    }
+}

@@ -1,0 +1,28 @@
+4. Create All Migrations for Employee Management
+
+Generate a migration file:
+
+php artisan make:migration create_employees_table
+
+Modify the generated file (database/migrations/xxxx_xx_xx_xxxxxx_create_employees_table.php):
+
+public function up()
+{
+    Schema::create('employees', function (Blueprint $table) {
+        $table->id();
+        $table->string('name');
+        $table->string('email')->unique();
+        $table->string('position');
+        $table->decimal('salary', 10, 2);
+        $table->timestamps();
+    });
+}
+
+public function down()
+{
+    Schema::dropIfExists('employees');
+}
+
+Run the migration:
+
+php artisan migrate

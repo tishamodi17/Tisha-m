@@ -1,0 +1,35 @@
+8. Send Email in Laravel
+Configure Mail Settings in .env
+
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=your_username
+MAIL_PASSWORD=your_password
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=your_email@example.com
+MAIL_FROM_NAME="Your App Name"
+
+Generate Mailable
+
+php artisan make:mail WelcomeMail
+
+Modify WelcomeMail.php
+
+use Illuminate\Mail\Mailable;
+
+class WelcomeMail extends Mailable
+{
+    public function build()
+    {
+        return $this->subject('Welcome to Our Platform')
+                    ->view('emails.welcome');
+    }
+}
+
+Send Email
+
+use App\Mail\WelcomeMail;
+use Illuminate\Support\Facades\Mail;
+
+Mail::to('john@example.com')->send(new WelcomeMail());

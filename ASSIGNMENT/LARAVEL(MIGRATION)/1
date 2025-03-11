@@ -1,0 +1,18 @@
+1. Configure Database in Laravel
+
+To configure a MySQL database in Laravel, follow these steps:
+
+    Open the .env file in your Laravel project.
+    Update the database configuration as follows:
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=your_database_name
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+
+Run the following command to clear and reload configurations:
+
+php artisan config:clear
+php artisan config:cache

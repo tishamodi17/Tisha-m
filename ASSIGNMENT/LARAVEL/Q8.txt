@@ -1,0 +1,145 @@
+Q8->Create Custom Macro For search User
+Practical
+1. Create Photo Gallery for above route.
+Note: upload files from admin side. Show all the images in user side
+2. Download admin panel for employee management and convert it
+in Laravel blades.
+
+
+1. Create Custom Macro for Search User
+Steps:
+
+    Open the AppServiceProvider file located in app/Providers/AppServiceProvider.php.
+    Add your macro inside the boot method.
+
+Example:
+
+use Illuminate\Support\Facades\Route;
+
+public function boot()
+{
+    Route::macro('searchUser', function ($key, $value) {
+        return \App\Models\User::where($key, 'LIKE', "%{$value}%")->get();
+    });
+}
+
+Usage:
+
+You can use this macro in your routes or controllers:
+
+$users = Route::searchUser('name', 'John');
+
+2. Create Photo Gallery
+Steps to Create Photo Gallery:
+
+a. Migration for Photos Table: Run the following Artisan command:
+
+php artisan make:migration create_photos_table
+
+In the migration file:
+
+Schema::create('photos', function (Blueprint $table) {
+    $table->id();
+    $table->string('title');
+    $table->string('file_path');
+    $table->timestamps();
+});
+
+Run the migration:
+
+php artisan migrate
+
+b. Model for Photo: Create a model:
+
+php artisan make:model Photo
+
+Update the Photo model:
+
+class Photo extends Model
+{
+    protected $fillable = ['title', 'file_path'];
+}
+
+c. Admin-Side File Upload Form: Create a form for uploading photos:
+
+<form action="{{ route('photos.store') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <input type="text" name="title" placeholder="Photo Title" required>
+    <input type="file" name="photo" required>
+    <button type="submit">Upload</button>
+</form>
+
+d. Store Uploaded Photos: Add a store method in PhotoController:
+
+public function store(Request $request)
+{
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
+
+    $path = $request->file('photo')->store('photos', 'public');
+
+    Photo::create([
+        'title' => $request->title,
+        'file_path' => $path,
+    ]);
+
+    return back()->with('success', 'Photo uploaded successfully!');
+}
+
+e. Display Images on User Side: In the gallery view:
+
+@foreach ($photos as $photo)
+    <div>
+        <h3>{{ $photo->title }}</h3>
+        <img src="{{ asset('storage/' . $photo->file_path) }}" alt="{{ $photo->title }}">
+    </div>
+@endforeach
+
+3. Convert Admin Panel for Employee Management into Laravel Blades
+Steps:
+
+    Download the Admin Panel Template:
+        Download an HTML admin panel template, such as from AdminLTE.
+
+    Set Up Blade Layout: Create a layouts/admin.blade.php file:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Admin Panel</title>
+    <!-- Add required CSS files -->
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+</head>
+<body>
+    <div class="wrapper">
+        @include('partials.sidebar')
+        <div class="content">
+            @yield('content')
+        </div>
+    </div>
+</body>
+</html>
+
+Create Sidebar Partial: Create partials/sidebar.blade.php:
+
+<nav>
+    <ul>
+        <li><a href="{{ route('employees.index') }}">Employees</a></li>
+        <li><a href="{{ route('photos.index') }}">Photos</a></li>
+    </ul>
+</nav>
+
+Add Blade Views: For example, create employees/index.blade.php:
+
+@extends('layouts.admin')
+
+@section('content')
+    <h1>Employee Management</h1>
+    <!-- Employee management table -->
+@endsection
+
+Link Routes to Controllers: Define routes in routes/web.php:
+
+Route::resource('employees', EmployeeController::class);

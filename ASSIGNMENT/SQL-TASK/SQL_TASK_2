@@ -1,0 +1,21 @@
+A) SELECT * FROM orders WHERE amount > 1000;
+
+B) SELECT name, city FROM salespeople WHERE city = 'London' AND commission > 0.10;
+
+C) SELECT * FROM salespeople WHERE city IN ('Barcelona', 'London');
+
+D) SELECT * FROM salespeople WHERE commission > 0.10 AND commission < 0.12;
+
+E) SELECT * FROM customers WHERE city IS NULL;
+
+F) SELECT * FROM orders WHERE order_date = '1994-10-03' OR order_date = '1994-10-04';
+
+G) SELECT * FROM customers WHERE salesperson IN ('Peel', 'Motika');
+
+H) SELECT * FROM customers WHERE name LIKE 'A%' OR name LIKE 'B%';
+
+I) SELECT * FROM customers WHERE (rating > 100 OR city = 'Rome');
+
+J) SELECT * FROM orders WHERE amt IS NOT NULL AND amt <> 0;
+
+K) SELECT COUNT(DISTINCT salesperson_id) AS number_of_salespeople FROM orders;
